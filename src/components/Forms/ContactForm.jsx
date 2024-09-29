@@ -3,8 +3,15 @@ import { Button, FormControl, FormLabel, Input, Icon } from '@chakra-ui/react';
 import { RiPhoneFill, RiUserFill, RiUserAddFill } from '@remixicon/react';
 import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+
+import { useToaster } from '../../hooks/hooks';
+import { addContact } from '../../redux/contacts/operations';
 
 export const ContactForm = ({ onClose }) => {
+  const dispatch = useDispatch();
+  const { showToast } = useToaster();
+
   const schema = yup.object().shape({
     name: yup.string().required(),
     phone_number: yup.string().required(),
@@ -15,8 +22,18 @@ export const ContactForm = ({ onClose }) => {
     phone_number: "",
   };
 
-  const onAddContact = () => {
-    onClose();
+  const onAddContact = ({ name, phone_number }, { resetForm }) => {
+    try {
+      dispatch(addContact({ name, phone_number }));
+      showToast({
+        title: 'New contact successfully added!',
+        status: 'success',
+      });
+      resetForm();
+      onClose();
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   return (
@@ -31,8 +48,8 @@ export const ContactForm = ({ onClose }) => {
           <Field as={Input} id='name' name='name' type='text' placeholder='Enter contact name' />
         </FormControl>
         <FormControl isRequired marginBottom={'12px'}>
-          <FormLabel htmlFor='number' display='flex' alignItems='center'><Icon as={RiPhoneFill} mr={'8px'} />Number</FormLabel>
-          <Field as={Input} id='number' name='number' type='tel' placeholder='Enter contact phone number' />
+          <FormLabel htmlFor='phone_number' display='flex' alignItems='center'><Icon as={RiPhoneFill} mr={'8px'} />Number</FormLabel>
+          <Field as={Input} id='phone_number' name='phone_number' type='tel' placeholder='Enter contact phone number' />
         </FormControl>
         <Button type='submit'><Icon as={RiUserAddFill} mr={'8px'} />Add contact</Button>
       </Form>

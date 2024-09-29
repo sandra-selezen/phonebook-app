@@ -17,7 +17,7 @@ export const ContactModal = ({ isOpen, onClose, title, children }) => {
         backdropInvert='20%'
         backdropBlur='2px'
       />
-      <ModalContent>
+      <ModalContent padding={4}>
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = "https://phonebook-api-4m0u.onrender.com/api";
 
@@ -18,7 +19,8 @@ export const register = createAsyncThunk(
       const response = await axios.post('/users/register', credentials);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      toast.error(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -31,7 +33,8 @@ export const logIn = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      toast.error(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
