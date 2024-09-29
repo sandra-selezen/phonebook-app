@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import { Container } from '@chakra-ui/react';
 
-// eslint-disable-next-line react/prop-types
 export const MainContainer = ({ children }) => {
   return (
     <Container
@@ -21,4 +21,8 @@ export const MainContainer = ({ children }) => {
       {children}
     </Container>
   )
+}
+
+MainContainer.propTypes = {
+  children: PropTypes.any,
 }
