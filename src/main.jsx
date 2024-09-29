@@ -14,7 +14,7 @@ createRoot(document.getElementById('root')).render(
     <ChakraProvider theme={theme}>
     <Provider store={store}>
       <PersistGate loading={<Spinner />} persistor={persistor}>
-        <BrowserRouter basename='/'>
+        <BrowserRouter>
           <App />
         </BrowserRouter>
       </PersistGate>
