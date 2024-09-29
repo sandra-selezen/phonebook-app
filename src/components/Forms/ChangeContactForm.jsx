@@ -23,11 +23,11 @@ export const ChangeContactForm = ({ initialValues, onSubmit }) => {
     >
       <Form>
         <FormControl marginBottom={'12px'}>
-          <FormLabel htmlFor='name'><Icon as={RiUserFill} mr={'8px'} />Name</FormLabel>
+          <FormLabel htmlFor='name' display='flex' alignItems='center'><Icon as={RiUserFill} mr={'8px'} />Name</FormLabel>
           <Field as={Input} id='name' name='name' type='text' />
         </FormControl>
         <FormControl marginBottom={'12px'}>
-          <FormLabel htmlFor='number'><Icon as={RiPhoneFill} mr={'8px'} />Number</FormLabel>
+          <FormLabel htmlFor='number' display='flex' alignItems='center'><Icon as={RiPhoneFill} mr={'8px'} />Number</FormLabel>
           <Field as={Input} id='number' name='number' type='tel' />
         </FormControl>
         <Button type='submit'>Change contact</Button>

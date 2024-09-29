@@ -1,8 +1,13 @@
-import { MainContainer } from "../components/Layouts/MainContainer";
+import { Heading } from '@chakra-ui/react';
+import { MainContainer } from '../components/Layouts/MainContainer';
+import { LoginForm } from '../components/Forms/LoginForm';
 
 const Login = () => {
   return (
-    <MainContainer>Login</MainContainer>
+    <MainContainer>
+      <Heading textAlign={'center'} marginBottom={'12px'}>Log In</Heading>
+      <LoginForm />
+    </MainContainer>
   )
 }
 

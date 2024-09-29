@@ -27,11 +27,11 @@ export const ContactForm = ({ onClose }) => {
     >
       <Form>
         <FormControl isRequired marginBottom={'12px'}>
-          <FormLabel htmlFor='name'><Icon as={RiUserFill} mr={'8px'} />Name</FormLabel>
+          <FormLabel htmlFor='name' display='flex' alignItems='center'><Icon as={RiUserFill} mr={'8px'} />Name</FormLabel>
           <Field as={Input} id='name' name='name' type='text' placeholder='Enter contact name' />
         </FormControl>
         <FormControl isRequired marginBottom={'12px'}>
-          <FormLabel htmlFor='number'><Icon as={RiPhoneFill} mr={'8px'} />Number</FormLabel>
+          <FormLabel htmlFor='number' display='flex' alignItems='center'><Icon as={RiPhoneFill} mr={'8px'} />Number</FormLabel>
           <Field as={Input} id='number' name='number' type='tel' placeholder='Enter contact phone number' />
         </FormControl>
         <Button type='submit'><Icon as={RiUserAddFill} mr={'8px'} />Add contact</Button>
