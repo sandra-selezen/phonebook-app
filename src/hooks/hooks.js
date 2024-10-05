@@ -2,6 +2,8 @@ import { useToast } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectIsRefreshing, selectUser } from '../redux/auth/selectors';
 import { selectContacts, selectIsLoading, selectError } from '../redux/contacts/selectors';
+import { selectFilter } from '../redux/filter/selectors';
+import { selectFilteredContacts } from '../redux/filter/selectors';
 
 export const useAuth = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -26,6 +28,10 @@ export const useContacts = () => {
     isError,
   }
 };
+
+export const useFilter = () => useSelector(selectFilter);
+
+export const useFilteredContacts = () => useSelector(selectFilteredContacts);
 
 export const useToaster = () => {
   const toast = useToast();

@@ -27,9 +27,12 @@ const updateContactFulfilledReduser = (state, action) => {
   state.isLoading = false;
   state.error = null;
   const index = state.items.findIndex(
-    contact => contact._id === action.payload
+    contact => contact._id === action.payload._id
   );
-  state.items.splice(index, 1, action.payload);
+
+  if (index !== -1) {
+    state.items[index] = action.payload;
+  }
 };
 
 const deleteContactFulfilledReducer = (state, action) => {
@@ -38,7 +41,10 @@ const deleteContactFulfilledReducer = (state, action) => {
   const index = state.items.findIndex(
     contact => contact._id === action.payload
   );
-  state.items.splice(index, 1);
+
+  if (index !== -1) {
+    state.items.splice(index, 1);
+  }
 };
 
 const clearContactsFulfilledReducer = (state) => {

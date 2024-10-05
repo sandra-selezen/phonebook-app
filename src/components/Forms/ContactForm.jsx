@@ -5,11 +5,12 @@ import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 
-import { useToaster } from '../../hooks/hooks';
+import { useContacts, useToaster } from '../../hooks/hooks';
 import { addContact } from '../../redux/contacts/operations';
 
 export const ContactForm = ({ onClose }) => {
   const dispatch = useDispatch();
+  const { contacts } = useContacts();
   const { showToast } = useToaster();
 
   const schema = yup.object().shape({
@@ -22,15 +23,33 @@ export const ContactForm = ({ onClose }) => {
     phone_number: "",
   };
 
+  const isReplicated = ({ name, phone_number }) => {
+    const normalizedContactName = name.toLowerCase().trim();
+    const normalizedContactNumber = phone_number.trim();
+    const replicatedContactName = contacts.find(contact => {
+      return (contact.name.toLowerCase().trim() === normalizedContactName && contact.phone_number.trim() === normalizedContactNumber)
+    });
+
+    return Boolean(replicatedContactName);
+  }
+
   const onAddContact = ({ name, phone_number }, { resetForm }) => {
     try {
-      dispatch(addContact({ name, phone_number }));
-      showToast({
-        title: 'New contact successfully added!',
-        status: 'success',
-      });
-      resetForm();
-      onClose();
+      if (isReplicated({ name, phone_number })) {
+        showToast({
+          title: 'This contact is already in your Phonebook! 👻',
+          status: 'warning',
+        })
+      } else {
+        dispatch(addContact({ name, phone_number }));
+        showToast({
+          title: 'New contact successfully added!',
+          status: 'success',
+        });
+
+        resetForm();
+        onClose();
+      }
     } catch (error) {
       throw new Error(error);
     }
